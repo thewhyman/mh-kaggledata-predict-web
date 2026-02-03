@@ -10,6 +10,8 @@ The model is trained on data based on the **[Mental Health in Tech Survey 2016](
 
 *Acknowledgement: This dataset is available on Kaggle and provided by OSMI.*
 
+For a detailed history of the project's development and fixes, see the [Project Walkthrough](docs/project_walkthrough.md).
+
 > **Note:** This repository includes a data generation script (`generate_sample_data.py`) that creates a synthetic dataset mirroring the schema and data quality issues (missing values, typos) of the original Kaggle dataset to demonstrate the robustness of the cleaning pipeline.
 
 ## 🛠️ Tech Stack
@@ -99,4 +101,5 @@ This application is Dockerized and ready to be deployed to **Google Cloud Run**,
     Upon success, the terminal will display a Service URL (e.g., `https://mh-predictor-xyz-uc.a.run.app`). Click it to see your live ML app!
 
 ---
+
 
