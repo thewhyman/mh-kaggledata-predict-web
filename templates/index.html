@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mental Health Prediction</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; padding-top: 2rem; }
+        .container { max-width: 800px; background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .form-label { font-weight: bold; }
+        .prediction-box { margin-top: 2rem; padding: 1.5rem; display: none; border-radius: 8px; text-align: center; }
+        .prediction-box.Yes { background-color: #ffebee; color: #c62828; border: 1px solid #ffcdd2; }
+        .prediction-box.No { background-color: #e8f5e9; color: #2e7d32; border: 1px solid #c8e6c9; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 class="text-center mb-4">Mental Health Treatment Predictor</h1>
+    <p class="text-center text-muted mb-5">Enter employee details to predict if they might seek mental health treatment.</p>
+
+    <form id="predictionForm">
+        <div class="row g-3">
+            <!-- Demographics -->
+            <div class="col-md-4">
+                <label for="Age" class="form-label">Age</label>
+                <input type="number" class="form-control" id="Age" name="Age" value="30" required>
+            </div>
+            <div class="col-md-4">
+                <label for="Gender" class="form-label">Gender</label>
+                <select class="form-select" id="Gender" name="Gender">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label for="Country" class="form-label">Country</label>
+                <input type="text" class="form-control" id="Country" name="Country" value="United States">
+            </div>
+
+            <!-- Work Context -->
+            <div class="col-md-6">
+                <label for="self_employed" class="form-label">Self Employed?</label>
+                <select class="form-select" id="self_employed" name="self_employed">
+                    <option value="No">No</option>
+                    <option value="Yes">Yes</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label for="tech_company" class="form-label">Tech Company?</label>
+                <select class="form-select" id="tech_company" name="tech_company">
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+             <div class="col-md-6">
+                <label for="remote_work" class="form-label">Remote Work?</label>
+                <select class="form-select" id="remote_work" name="remote_work">
+                    <option value="No">No</option>
+                    <option value="Yes">Yes</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label for="No_employees" class="form-label">Company Size</label>
+                <select class="form-select" id="No_employees" name="No_employees">
+                    <option value="1-5">1-5</option>
+                    <option value="6-25">6-25</option>
+                    <option value="26-100">26-100</option>
+                    <option value="100-500">100-500</option>
+                    <option value="500-1000">500-1000</option>
+                    <option value="More than 1000">More than 1000</option>
+                </select>
+            </div>
+
+            <!-- Health History -->
+            <div class="col-md-6">
+                <label for="family_history" class="form-label">Family History?</label>
+                <select class="form-select" id="family_history" name="family_history">
+                    <option value="No">No</option>
+                    <option value="Yes">Yes</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label for="work_interferes" class="form-label">Work Interference?</label>
+                <select class="form-select" id="work_interferes" name="work_interferes">
+                    <option value="Never">Never</option>
+                    <option value="Rarely">Rarely</option>
+                    <option value="Sometimes">Sometimes</option>
+                    <option value="Often">Often</option>
+                </select>
+            </div>
+
+            <!-- Company Support -->
+            <div class="col-md-4">
+                <label for="benefits" class="form-label">Benefits?</label>
+                <select class="form-select" id="benefits" name="benefits">
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                    <option value="Don't know">Don't know</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label for="care_options" class="form-label">Care Options?</label>
+                <select class="form-select" id="care_options" name="care_options">
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                    <option value="Not sure">Not sure</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label for="wellness_program" class="form-label">Wellness Program?</label>
+                <select class="form-select" id="wellness_program" name="wellness_program">
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                    <option value="Don't know">Don't know</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label for="seek_help" class="form-label">Seek Help Resources?</label>
+                <select class="form-select" id="seek_help" name="seek_help">
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                    <option value="Don't know">Don't know</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label for="anonymity" class="form-label">Anonymity Protected?</label>
+                <select class="form-select" id="anonymity" name="anonymity">
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                    <option value="Don't know">Don't know</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label for="leave" class="form-label">Medical Leave Ease</label>
+                <select class="form-select" id="leave" name="leave">
+                    <option value="Very easy">Very easy</option>
+                    <option value="Somewhat easy">Somewhat easy</option>
+                    <option value="Somewhat difficult">Somewhat difficult</option>
+                    <option value="Very difficult">Very difficult</option>
+                    <option value="Don't know">Don't know</option>
+                </select>
+            </div>
+
+            <!-- Social / Openness -->
+            <div class="col-md-6">
+                <label for="coworkers" class="form-label">Discuss with Coworkers?</label>
+                <select class="form-select" id="coworkers" name="coworkers">
+                    <option value="Some of them">Some of them</option>
+                    <option value="No">No</option>
+                    <option value="Yes">Yes</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label for="supervisor" class="form-label">Discuss with Supervisor?</label>
+                <select class="form-select" id="supervisor" name="supervisor">
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                    <option value="Some of them">Some of them</option>
+                </select>
+            </div>
+
+             <!-- Consequences -->
+             <div class="col-md-6">
+                <label for="mental_health_consequence" class="form-label">Mental Health Consequence?</label>
+                <select class="form-select" id="mental_health_consequence" name="mental_health_consequence">
+                    <option value="No">No</option>
+                    <option value="Maybe">Maybe</option>
+                    <option value="Yes">Yes</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label for="phys_health_consequence" class="form-label">Physical Health Consequence?</label>
+                <select class="form-select" id="phys_health_consequence" name="phys_health_consequence">
+                    <option value="No">No</option>
+                    <option value="Maybe">Maybe</option>
+                    <option value="Yes">Yes</option>
+                </select>
+            </div>
+
+            <!-- Interviews -->
+             <div class="col-md-6">
+                <label for="mental_health_interview" class="form-label">Bring up in Interview (Mental)?</label>
+                <select class="form-select" id="mental_health_interview" name="mental_health_interview">
+                    <option value="No">No</option>
+                    <option value="Maybe">Maybe</option>
+                    <option value="Yes">Yes</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label for="phys_health_interview" class="form-label">Bring up in Interview (Physical)?</label>
+                <select class="form-select" id="phys_health_interview" name="phys_health_interview">
+                    <option value="Maybe">Maybe</option>
+                    <option value="No">No</option>
+                    <option value="Yes">Yes</option>
+                </select>
+            </div>
+
+            <div class="col-md-6">
+                <label for="mental_vs_physical" class="form-label">Employer takes mental as seriously as physical?</label>
+                <select class="form-select" id="mental_vs_physical" name="mental_vs_physical">
+                    <option value="Don't know">Don't know</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+             <div class="col-md-6">
+                <label for="obs_consequence" class="form-label">Observed Negative Consequences?</label>
+                <select class="form-select" id="obs_consequence" name="obs_consequence">
+                    <option value="No">No</option>
+                    <option value="Yes">Yes</option>
+                </select>
+            </div>
+
+            <div class="col-12 text-center mt-4">
+                <button type="submit" class="btn btn-primary btn-lg px-5">Predict</button>
+            </div>
+        </div>
+    </form>
+
+    <div id="result" class="prediction-box">
+        <h3 id="resultText"></h3>
+        <p id="probabilityText"></p>
+    </div>
+</div>
+
+<script>
+    document.getElementById('predictionForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const form = e.target;
+        const formData = new FormData(form);
+        const resultBox = document.getElementById('result');
+        const resultText = document.getElementById('resultText');
+        const probText = document.getElementById('probabilityText');
+        
+        resultBox.style.display = 'none';
+        
+        try {
+            const response = await fetch('/predict', {
+                method: 'POST',
+                body: formData
+            });
+            
+            const data = await response.json();
+            
+            if (data.error) {
+                alert('Error: ' + data.error);
+                return;
+            }
+            
+            resultText.innerText = "Treatment Needed: " + data.treatment_needed;
+            probText.innerText = "Probability: " + data.probability;
+            
+            resultBox.className = 'prediction-box ' + data.treatment_needed;
+            resultBox.style.display = 'block';
+            
+        } catch (error) {
+            console.error('Error:', error);
+            alert('An error occurred. Check console.');
+        }
+    });
+</script>
+
+</body>
+</html>

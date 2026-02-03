@@ -1,0 +1,22 @@
+# Virtual Environment
+venv/
+env/
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Data & Artifacts
+*.pkl
+*.joblib
+data/
+# Exception: keep raw data if small, or document it. User provided it.
+# Usually data/ is ignored, but for this demo maybe user wants to keep the csv?
+# Standard practice: ignore data.
+# !data/mental_health_raw.csv 
+
+# IDE
+.DS_Store
+.vscode/
+.claude/    
